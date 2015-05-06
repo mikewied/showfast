@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>ShowFast</title>
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/vendor/nv.d3.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/nv.d3.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angularjs-nvd3-directives.js"></script>
+    <script type="text/javascript" src="js/angular-ui-router.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <script type="text/javascript" src="app/timeline/timeline_controller.js"></script>
+    <script type="text/javascript" src="app/timeline/timeline_service.js"></script>
+
+    <script type="text/javascript" src="app/runs/runs_controller.js"></script>
+
+  </head>
+  <body ng-app="showfast">
+
+      <div class="links">
+        <a ui-sref="timeline">Timeline</a></li> |
+        <a ui-sref="releases">Releases</a></li> |
+        <a ui-sref="feed">Feed</a></li> |
+        <a ui-sref="admin">Admin</a></li>
+      </div>
+
+	<div class="container">
+      <div ui-view></div>
+	</div>
+  </body>
+</html>

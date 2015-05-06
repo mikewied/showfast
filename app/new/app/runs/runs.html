@@ -1,0 +1,37 @@
+<div class="masthead text-center">
+	<h2>All test runs</h3>
+	<table class="table-striped table-bordered table-condensed t-all-runs">
+		<tr>
+			<th class="t-data t-seq">#</th>
+			<th class="t-data t-value">Value</th>
+			<th class="t-data t-report">HTML reports</th>
+			<th class="t-data t-report">Rebalance flows</th>
+			<th class="t-data t-report">Correlation matrices</th>
+		</tr>
+		<tr ng-repeat="run in runs">
+			<td class="t-data t-seq">{{run.seq}}</td>
+			<td class="t-data t-value">{{run.value}}</td>
+			<td class="t-data t-report">
+				<a ng-repeat="snapshot in run.snapshots"
+					 href="http://cbmonitor.sc.couchbase.com/reports/html/?snapshot={{snapshot}}"
+					 target="_blank">
+					<i class="icon-file"></i>
+				</a>
+			</td>
+			<td class="t-data t-moves">
+				<a ng-if="run.master_events"
+					 href="http://cbmonitor.sc.couchbase.com/reports/movements/?filename={{run.master_events}}"
+					 target="_blank">
+					<i class="icon-align-left"></i>
+				</a>
+			</td>
+			<td class="t-data t-corr">
+				<a ng-repeat="snapshot in run.snapshots"
+				   href="http://cbmonitor.sc.couchbase.com/reports/corr/?snapshot={{snapshot}}"
+				   target="_blank">
+					<i class="icon-th"></i>
+				</a>
+			</td>
+		</tr>
+	<table>
+</div>

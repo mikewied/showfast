@@ -1,0 +1,153 @@
+a, a:hover, a:visited {
+	color: #333;
+}
+
+.container {
+    width: 90%;
+}
+
+.column-chart {
+    height: 100px;
+}
+
+.bar-chart {
+    height: 100px;
+    margin: 0px;
+}
+
+.nv-series {
+	display: none;
+}
+
+hr {
+	margin: 0;
+}
+
+.btn-group {
+	margin-bottom: 10px;
+}
+
+.buildy {
+	margin-bottom: 10px;
+	margin-left: 20px;
+}
+
+.buildy a {
+	text-decoration: none;
+}
+
+.error_msg {
+	margin-top: 50px;
+}
+
+.t-inventory {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.t-data {
+    font-size: 93%;
+}
+
+.t-id {
+    text-align: left;
+    width: 25%;
+}
+
+.t-metric {
+	text-align: left;
+    width: 40%;
+}
+
+.t-build {
+	text-align: center;
+    width: 10%;
+}
+
+.t-avalue, .t-obsolete {
+	text-align: center;
+    width: 10%;
+}
+
+.t-buttons {
+    width: 5%;
+    text-align: center;
+}
+
+.icon-remove:hover {
+    cursor: pointer;
+}
+
+.t-all-runs {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.t-seq {
+    width: 4%;
+    text-align: center;
+}
+
+.t-value {
+    text-align: center;
+    width: 24%;
+}
+
+.t-report {
+    width: 24%;
+    text-align: center;
+}
+
+.t-moves {
+    width: 24%;
+    text-align: center;
+}
+
+.t-corr {
+    width: 24%;
+    text-align: center;
+}
+
+.vs {
+    vertical-align: text-bottom;
+}
+
+.t-release {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+.t-r-metric {
+    text-align: left;
+    width: 67%;
+}
+
+.t-baseline, .t-target, .t-comparison {
+    text-align: center;
+    width: 11%;
+}
+
+.metric-cluster {
+    font-size: 85%;
+    color: #999;
+}
+
+.metric-descr {
+    font-size: 93%;
+}
+
+.better {
+    color: #51a351;
+    font-weight: bold;
+}
+
+.worse {
+    color: #f89406;
+    font-weight: bold;
+}
+
+.links {
+    font-size: 93%;
+    margin-bottom: -20px;
+}
