@@ -1,18 +1,30 @@
 
+angular.module('sfRestService', []);
+
+angular.module('sfAdmin', []);
+
+angular.module('sfFeed', []);
+
+angular.module('sfReleases', []);
+
+angular.module('sfRuns', []);
+
 angular.module('sfTimeline', [
   'sfTimelineService'
 ]);
 
 angular.module('sfTimelineService', []);
 
-angular.module('sfRuns', []);
-
 angular.module('showfast', [
   'ui.router',
   'nvd3ChartDirectives',
+  'sfRestService',
+  'sfAdmin',
+  'sfFeed',
+  'sfReleases',
+  'sfRuns',
   'sfTimeline',
-  'sfTimelineService',
-  'sfRuns'
+  'sfTimelineService'
 ]).config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/timeline');
     
@@ -22,14 +34,14 @@ angular.module('showfast', [
     templateUrl: 'app/timeline/timeline.html',
     controller: 'sfTimelineController',
     resolve: {
-      metrics: function(sfTimelineService) {
-        return sfTimelineService.getMetrics();
+      metrics: function(sfRestService) {
+        return sfRestService.getMetrics();
       },
-      clusters: function(sfTimelineService) {
-        return sfTimelineService.getClusters();
+      clusters: function(sfRestService) {
+        return sfRestService.getClusters();
       },
-      timelines: function(sfTimelineService) {
-        return sfTimelineService.getTimelines();
+      timelines: function(sfRestService) {
+        return sfRestService.getTimelines();
       }
     }
   })
@@ -39,7 +51,6 @@ angular.module('showfast', [
     controller: 'sfRunsController',
     resolve: {
       test_run: function($http, $stateParams) {
-        //return "Run"
         return $http({
           method: 'GET',
           url: '/all_runs',
@@ -50,14 +61,35 @@ angular.module('showfast', [
   })
   .state('releases', {
     url: '/releases',
-    templateUrl: 'app/releases/releases.html'
+    templateUrl: 'app/releases/releases.html',
+    controller: 'sfReleasesController',
+    resolve: {
+      releases: function(sfRestService) {
+        return sfRestService.getReleases();
+      }
+    }
   })
   .state('feed', {
     url: '/feed',
-    templateUrl: 'app/feed/feed.html'
+    templateUrl: 'app/feed/feed.html',
+    controller: 'sfFeedController',
+    resolve: {
+      feed: function(sfRestService) {
+        return sfRestService.getFeed();
+      }
+    }
   })
   .state('admin', {
     url: '/admin',
-    templateUrl: 'app/admin/admin.html'
+    templateUrl: 'app/admin/admin.html',
+    controller: 'sfAdminController',
+    resolve: {
+      metrics: function(sfRestService) {
+        return sfRestService.getMetrics();
+      },
+      benchmarks: function(sfRestService) {
+        return sfRestService.getBenchmarks();
+      }
+    }
   })
 });

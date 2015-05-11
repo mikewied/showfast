@@ -1,3 +1,38 @@
-<div class="jumbotron text-center">
-    <h1>The Releases Page</h1>
+<div class="text-center">
+  <h2>Release dashboard</h2>
+  <div class="btn-group" data-toggle="buttons-radio">
+    <button
+      ng-repeat="baseline in baselines"
+      ng-class="{active: baseline == selectedBaseline}"
+      ng-click="setSelectedBaseline(baseline)"
+      class="btn btn-success">{{baseline}}
+    </button>
+  </div>
+  <span class="vs"><b>&nbsp;vs.&nbsp;</b></span>
+  <div class="btn-group" data-toggle="buttons-radio">
+    <button
+      ng-repeat="target in targets"
+      ng-class="{active: target == selectedTarget}"
+      ng-click="setSelectedTarget(target)"
+      class="btn btn-warning">{{target}}
+    </button>
+  </div>
+  <table class="table-striped table-bordered table-condensed t-release">
+    <tr>
+      <th class="t-data t-r-metric">Metric</th>
+      <th class="t-data t-comparison">Comparison</th>
+      <th class="t-data t-baseline">Baseline Build</th>
+      <th class="t-data t-target">Target Build</th>
+    </tr>
+    <tr ng-repeat="metric in metrics">
+      <td class="t-data t-r-metric">
+        <span class="metric-descr">
+          <b>{{metric.title}}</b><span><br>
+        <span class="metric-cluster">{{metric.cluster.OS}} / {{metric.cluster.Disk}}<span>
+      </td>
+      <td class="t-data t-comparison {{metric.class}}">{{metric.comparison}}</td>
+      <td class="t-data t-baseline">{{metric.baseline}}</td>
+      <td class="t-data t-target">{{metric.target}}</td>
+    </tr>
+  </table>
 </div>

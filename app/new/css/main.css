@@ -10,6 +10,11 @@ a, a:hover, a:visited {
     height: 100px;
 }
 
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .bar-chart {
     height: 100px;
     margin: 0px;
@@ -135,6 +140,20 @@ hr {
 
 .metric-descr {
     font-size: 93%;
+}
+
+.metric-container {
+    border-radius: 13px;
+    -moz-border-radius: 13px;
+    -webkit-border-radius: 13px;
+    border: 0px solid #000000;
+    padding-left: 9px;
+    background-color: #5bb75b;
+    color: #FFFFFF;
+    background-image: linear-gradient(to bottom,#62c462,#51a351);
+    max-width:900px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .better {

@@ -28,7 +28,7 @@
 	</div>
 </div>
 
-<div class="masthead metric" id="cont_{{metric.id}}" ng-repeat="metric in metrics">
+<div class="masthead metric" id="cont_{{metric.id}}" ng-repeat="metric in metrics | filter:byCategory">
   <hr/>
   <h4>
     <span id="{{metric.id}}" data-larger-is-better="{{metric.larger_is_better}}">
