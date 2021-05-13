@@ -45,25 +45,6 @@ func getBenchmarks(c *gin.Context) {
 	c.IndentedJSON(200, benchmarks)
 }
 
-func getImpressiveTests(c *gin.Context) {
-	component := c.Param("component")
-	build1 := c.Param("build1")
-	build2 := c.Param("build2")
-	activeParam := c.Param("active")
-	active := activeParam == "Active"
-
-	if build1 == "" || build2 == "" {
-		c.AbortWithError(400, errors.New("bad arguments"))
-		return
-	}
-	tests, err := ds.getImpressiveTests(component, build1, build2, active)
-	if err != nil {
-		c.AbortWithError(500, err)
-		return
-	}
-	c.IndentedJSON(200, tests)
-}
-
 func changeBenchmark(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
@@ -182,7 +163,6 @@ func httpEngine() *gin.Engine {
 	router.StaticFile("/admin", "./app/admin.html")
 	router.StaticFile("/comparison", "./app/comparison.html")
 	router.Static("/static", "./app")
-	router.StaticFile("/impressive", "./app/impressive.html")
 
 	rg := router.Group("/api/v1")
 
@@ -205,8 +185,6 @@ func httpEngine() *gin.Engine {
 	rg.GET("runs/:metric/:build", getRuns)
 
 	rg.GET("comparison/:build1/:build2", compare)
-
-	rg.GET("impressive/:component/:build1/:build2/:active", getImpressiveTests)
 
 	return router
 }

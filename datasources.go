@@ -9,7 +9,7 @@ import (
 	log "gopkg.in/inconshreveable/log15.v2"
 )
 
-var couchbaseBuckets = []string{"benchmarks", "clusters", "metrics", "impressive"}
+var couchbaseBuckets = []string{"benchmarks", "clusters", "metrics"}
 
 type dataStore struct {
 	cluster *gocb.Cluster
@@ -289,63 +289,6 @@ func cutoffClusterName(fullName string, clusterNames *[]string) string {
 		}
 	}
 	return fullName
-}
-
-func (ds *dataStore) getImpressiveTests(component string, build1 string, build2 string, active bool) (*[]Test, error) {
-	tests := []Test{}
-	var query *gocb.N1qlQuery
-	var params []interface{}
-	isActivePredicate := ""
-	if active {
-		isActivePredicate = "AND i.active = True "
-	}
-
-	query = gocb.NewN1qlQuery(
-		"SELECT i.category, i.title, i.active, i.windows, i.metric, " +
-			"ARRAY_AGG({b.`value`, b.`build`})[0].`build` as `b1`, " +
-			"ARRAY_AGG({b.`value`, b.`build`})[0].`value` as `v1`, " +
-			"ARRAY_AGG({b.`value`, b.`build`})[1].`build` as `b2`, " +
-			"ARRAY_AGG({b.`value`, b.`build`})[1].`value` as `v2` " +
-			"FROM impressive i LEFT JOIN benchmarks b ON i.metric = b.metric AND b.hidden = false AND b.`build` IN [$3, $4] " +
-			"WHERE i.type = $1 AND i.component = $2 " + isActivePredicate +
-			"GROUP BY i.category, i.title, i.active, i.windows, i.metric " +
-			"ORDER BY i.category")
-
-	params = []interface{}{"test", component, build1, build2}
-	rows, err := ds.cluster.ExecuteN1qlQuery(query, params)
-	if err != nil {
-		log.Error(err.Error())
-		return &tests, err
-	}
-	var row Test
-	for rows.Next(&row) {
-		if row.B1 == build2 || row.B2 == build1 {
-			tmpB := row.B1
-			tmpV := row.V1
-			row.B1 = row.B2
-			row.V1 = row.V2
-			row.B2 = tmpB
-			row.V2 = tmpV
-		}
-
-		tests = append(tests, row)
-		row = Test{}
-	}
-
-	clusterNames := getClusterNames()
-
-	for k, v := range tests {
-		if v.B2 == "" {
-			url, _ := getJobLink(cutoffClusterName(v.Metric, clusterNames), build2)
-			tests[k].JobUrl2 = url
-		}
-		if v.B1 == "" {
-			url, _ := getJobLink(cutoffClusterName(v.Metric, clusterNames), build1)
-			tests[k].JobUrl1 = url
-		}
-	}
-
-	return &tests, nil
 }
 
 func (ds *dataStore) getBenchmarks(component, category string, subCategory string) (*[]Benchmark, error) {
