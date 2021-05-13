@@ -4,6 +4,7 @@
 *.o
 *.a
 *.so
+\#*
 
 # Folders
 _obj
@@ -24,7 +25,6 @@ _testmain.go
 
 *.exe
 
+go.sum
 showfast
-vendor/github.com
-vendor/golang.org
-vendor/gopkg.in/
+vendor
