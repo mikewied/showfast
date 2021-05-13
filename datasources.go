@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"gopkg.in/couchbase/gocb.v1"
+	gocb "github.com/couchbase/gocb"
 	log "gopkg.in/inconshreveable/log15.v2"
 )
 
