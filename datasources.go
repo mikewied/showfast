@@ -34,6 +34,7 @@ func newDataStore() *dataStore {
 }
 
 func (ds *dataStore) auth() {
+    username := os.Getenv("CB_USER")
 	password := os.Getenv("CB_PASS")
 	if password == "" {
 		log.Error("missing password")
@@ -41,7 +42,7 @@ func (ds *dataStore) auth() {
 	}
 
 	ds.cluster.Authenticate(gocb.PasswordAuthenticator{
-     Username: "Administrator",
+     Username: username,
      Password: password,
      })
 
