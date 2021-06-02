@@ -95,7 +95,7 @@ function DefineMenu($scope, $http) {
     $http.get('/static/menu.json').success(function(menu) {
         $scope.components = menu.components;
         $scope.oses = menu.oses;
-        $scope.bucket_collection = menu.bucket_collection;
+        $scope.test_type = menu.test_type;
     });
 }
 

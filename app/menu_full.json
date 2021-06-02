@@ -2,8 +2,8 @@
     "oses": [
         "Linux", "Windows"
     ],
-    "bucket_collection":[
-        "All","Bucket", "Collection"
+    "test_type":[
+        "All","Throughtput", "Latency"
     ],
     "components": {
         "kv": {
